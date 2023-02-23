@@ -1,3 +1,4 @@
+import turtle
 from turtle import Screen, Turtle
 from time import sleep
 
@@ -8,20 +9,15 @@ DOWN = 270
 LEFT = 180
 RIGHT = 0
 
-class Snake:
+class Snake(Turtle):
     def __init__(self):
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
-
+        self.tempo = 1
     def create_snake(self):
         for position in START_POSITION:
-            t = Turtle(shape='square')
-            t.penup()
-            t.color('white')
-            t.goto(position)
-            t.penup()
-            self.segments.append(t)
+            self.add_segment(position)
 
     def move(self):
         for seg_num in range(len(self.segments) - 1, 0, -1):
@@ -46,7 +42,20 @@ class Snake:
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
 
+    def add_segment(self, position):
+        t = Turtle(shape='square')
+        t.penup()
+        t.color('white')
+        t.goto(position)
+        t.penup()
+        self.segments.append(t)
 
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
+
+    def increase_speed(self):
+        self.tempo += 1
+        self.speed(self.tempo)
 
 
 
