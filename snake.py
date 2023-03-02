@@ -57,6 +57,12 @@ class Snake(Turtle):
         self.tempo += 1
         self.speed(self.tempo)
 
+    def reset(self):
+        for s in self.segments:
+            s.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
 
 
 
